@@ -1,3 +1,8 @@
+# General
+phpmd.xml
+.idea
+.AppleDouble
+.LSOverride
 
 ###> symfony/framework-bundle ###
 /.env.local

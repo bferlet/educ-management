@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use App\Entity\Traits\EntityIdTrait;
 
 
 /**
@@ -11,17 +12,7 @@ use Ramsey\Uuid\Uuid;
  */
 class Student
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $uid;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -69,7 +60,7 @@ class Student
 
     public function __construct()
     {
-        $this->uid = $this->generateUid();
+        $this->uuid = Uuid::uuid4();
     }
 
 
@@ -78,10 +69,6 @@ class Student
         return $this->id;
     }
 
-    public function generateUid()
-    {
-        return Uuid::uuid4();
-    }
     public function getUid(): ?string
     {
         return $this->uid;

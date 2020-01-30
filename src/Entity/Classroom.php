@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Traits\EntityTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,17 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Classroom
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $uuid;
+    use EntityIdTrait;
+    use EntityTimeTrait;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -53,23 +46,6 @@ class Classroom
         $this->students = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -90,30 +66,6 @@ class Classroom
     public function setGrade(int $grade): self
     {
         $this->grade = $grade;
-
-        return $this;
-    }
-
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->createdDate;
-    }
-
-    public function setCreatedDate(\DateTimeImmutable $createdDate): self
-    {
-        $this->createdDate = $createdDate;
-
-        return $this;
-    }
-
-    public function getUpdateDate(): ?\DateTimeInterface
-    {
-        return $this->updateDate;
-    }
-
-    public function setUpdateDate(?\DateTimeInterface $updateDate): self
-    {
-        $this->updateDate = $updateDate;
 
         return $this;
     }

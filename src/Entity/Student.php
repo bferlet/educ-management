@@ -2,24 +2,18 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTrait;
+use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
  */
 class Student
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $uuid;
+    use IdTrait;
+    use DateTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -151,18 +145,6 @@ class Student
     public function setSecondmark(?int $secondmark): self
     {
         $this->secondmark = $secondmark;
-
-        return $this;
-    }
-
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->createdDate;
-    }
-
-    public function setCreatedDate(\DateTimeImmutable $createdDate): self
-    {
-        $this->createdDate = $createdDate;
 
         return $this;
     }

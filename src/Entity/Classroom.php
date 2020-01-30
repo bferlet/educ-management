@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTrait;
+use App\Entity\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,17 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Classroom
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $uuid;
+    use IdTrait;
+    use DateTrait
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -90,30 +83,6 @@ class Classroom
     public function setGrade(int $grade): self
     {
         $this->grade = $grade;
-
-        return $this;
-    }
-
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->createdDate;
-    }
-
-    public function setCreatedDate(\DateTimeImmutable $createdDate): self
-    {
-        $this->createdDate = $createdDate;
-
-        return $this;
-    }
-
-    public function getUpdatedDate(): ?\DateTimeImmutable
-    {
-        return $this->updatedDate;
-    }
-
-    public function setUpdatedDate(?\DateTimeImmutable $updatedDate): self
-    {
-        $this->updatedDate = $updatedDate;
 
         return $this;
     }

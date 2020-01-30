@@ -23,15 +23,6 @@ class Classroom
      */
     private $grade;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $createdDate;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedDate;
 
     /**
      * Classroom constructor.
@@ -83,27 +74,4 @@ class Classroom
         return $this;
     }
 
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->createdDate;
-    }
-
-    public function setCreatedDate(\DateTimeImmutable $createdDate): self
-    {
-        $this->createdDate = $createdDate;
-
-        return $this;
-    }
-
-    public function getUpdatedDate(): ?\DateTimeInterface
-    {
-        return $this->updatedDate;
-    }
-
-    public function setUpdatedDate(?\DateTimeInterface $updatedDate): self
-    {
-        $this->updatedDate = $updatedDate;
-
-        return $this;
-    }
 }

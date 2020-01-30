@@ -44,15 +44,6 @@ class Student
      */
     private $secondMark;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $createdDate;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedDate;
 
     /**
      * Student constructor.
@@ -153,27 +144,5 @@ class Student
         return $this;
     }
 
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->createdDate;
-    }
 
-    public function setCreatedDate(\DateTimeImmutable $createdDate): self
-    {
-        $this->createdDate = $createdDate;
-
-        return $this;
-    }
-
-    public function getUpdatedDate(): ?\DateTimeInterface
-    {
-        return $this->updatedDate;
-    }
-
-    public function setUpdatedDate(\DateTimeInterface $updatedDate): self
-    {
-        $this->updatedDate = $updatedDate;
-
-        return $this;
-    }
 }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    {{ dump() }}
+    <h1>Hello {{ dump(name) }}</h1>
+    {{ app.request }}
+</div>
+{% endblock %}

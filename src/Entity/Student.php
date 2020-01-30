@@ -2,26 +2,20 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdentifierTrait;
+use App\Entity\Traits\IdentifierTraitTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
  */
 class Student
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $uuid;
+    use TimestampableTrait;
+    use IdentifierTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,16 +43,6 @@ class Student
     private $secondMark;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $CreatedDate;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedDate;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Student", inversedBy="students")
      */
     private $classRoom;
@@ -71,16 +55,6 @@ class Student
     public function __construct()
     {
         $this->students = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
     }
 
     public function setUuid(string $uuid): self
@@ -146,30 +120,6 @@ class Student
     public function setSecondMark(?string $secondMark): self
     {
         $this->secondMark = $secondMark;
-
-        return $this;
-    }
-
-    public function getCreatedDate(): ?\DateTimeImmutable
-    {
-        return $this->CreatedDate;
-    }
-
-    public function setCreatedDate(\DateTimeImmutable $CreatedDate): self
-    {
-        $this->CreatedDate = $CreatedDate;
-
-        return $this;
-    }
-
-    public function getUpdatedDate(): ?\DateTimeInterface
-    {
-        return $this->updatedDate;
-    }
-
-    public function setUpdatedDate(\DateTimeInterface $updatedDate): self
-    {
-        $this->updatedDate = $updatedDate;
 
         return $this;
     }

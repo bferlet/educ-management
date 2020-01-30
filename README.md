@@ -15,10 +15,6 @@
 - [Composer](https://getcomposer.org/download)
 - and the [usual Symfony application requirements][1].
 
-### Project view
-
-[TO FILL]
-
 ### Installation
 
 1 . Clone the current repository:
@@ -36,7 +32,7 @@ $ composer install
 $ composer update
 $ bin/console doctrine:database:create
 $ bin/console doctrine:migrations:migrate #IfMigrationsExist or bin/console m:m
-$ bin/console d:f:l
+$ bin/console doctrine:fixtures:load #Load fake data in DB
 ```
 
 ## Usage
@@ -44,6 +40,14 @@ $ bin/console d:f:l
 ```bash
 $ cd educ-management
 $ php bin/console server:run
+```
+
+## Makefile usage
+
+```bash
+$ make install #Install dependencies
+$ make update #Update components
+$ make clear #Clear assets, vendors and so on
 ```
 
 ## Git reminder

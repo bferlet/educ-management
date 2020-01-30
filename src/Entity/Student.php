@@ -61,6 +61,11 @@ class Student
      */
     private $updatedDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Classroom", inversedBy="students")
+     */
+    private $classroom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +175,18 @@ class Student
     public function setUpdatedDate(?\DateTimeInterface $updatedDate): self
     {
         $this->updatedDate = $updatedDate;
+
+        return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
 
         return $this;
     }

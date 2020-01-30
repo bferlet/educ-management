@@ -34,6 +34,9 @@ $ git clone https://github.com/GaetanRole/educ-management
 ```bash
 $ composer install
 $ composer update
+$ bin/console doctrine:database:create
+$ bin/console doctrine:migrations:migrate #IfMigrationsExist or bin/console m:m
+$ bin/console d:f:l
 ```
 
 ## Usage

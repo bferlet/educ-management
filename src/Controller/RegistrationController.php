@@ -12,6 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
+/**
+ * @author Gaëtan Rolé-Dubruille <gaetan.role-dubruille@sensiolabs.com>
+ */
 class RegistrationController extends AbstractController
 {
     /**

@@ -5,6 +5,9 @@ namespace App\Tests;
 use App\Services\Calcul;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @author Gaëtan Rolé-Dubruille <gaetan.role-dubruille@sensiolabs.com>
+ */
 class CalculTest extends TestCase
 {
     /**

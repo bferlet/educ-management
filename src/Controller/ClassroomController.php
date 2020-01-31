@@ -5,28 +5,36 @@ namespace App\Controller;
 use App\Entity\Classroom;
 use App\Form\ClassroomType;
 use App\Repository\ClassroomRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/classroom")
+ * @author Gaëtan Rolé-Dubruille <gaetan.role-dubruille@sensiolabs.com>
+ * @Route("/classroom", name="app_classroom_")
  */
-class ClassroomController extends AbstractController
+final class ClassroomController extends AbstractController
 {
-    /**
-     * @Route("/", name="classroom_index", methods={"GET"})
-     */
-    public function index(ClassroomRepository $classroomRepository): Response
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        return $this->render('classroom/index.html.twig', [
-            'classrooms' => $classroomRepository->findAll(),
-        ]);
+        $this->entityManager = $entityManager;
     }
 
     /**
-     * @Route("/new", name="classroom_new", methods={"GET","POST"})
+     * @Route("/", name="index", methods={"GET"})
+     */
+    public function index(ClassroomRepository $classroomRepository): Response
+    {
+        return $this->render('classroom/index.html.twig', ['classrooms' => $classroomRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -35,11 +43,10 @@ class ClassroomController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($classroom);
-            $entityManager->flush();
+            $this->entityManager->persist($classroom);
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('classroom_index');
+            return $this->redirectToRoute('app_classroom_index');
         }
 
         return $this->render('classroom/new.html.twig', [
@@ -49,17 +56,15 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="classroom_show", methods={"GET"})
+     * @Route("/{uuid}", name="show", methods={"GET"})
      */
     public function show(Classroom $classroom): Response
     {
-        return $this->render('classroom/show.html.twig', [
-            'classroom' => $classroom,
-        ]);
+        return $this->render('classroom/show.html.twig', ['classroom' => $classroom]);
     }
 
     /**
-     * @Route("/{id}/edit", name="classroom_edit", methods={"GET","POST"})
+     * @Route("/{uuid}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Classroom $classroom): Response
     {
@@ -67,9 +72,9 @@ class ClassroomController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('classroom_index');
+            return $this->redirectToRoute('app_classroom_index');
         }
 
         return $this->render('classroom/edit.html.twig', [
@@ -79,16 +84,15 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="classroom_delete", methods={"DELETE"})
+     * @Route("/{uuid}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Classroom $classroom): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$classroom->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($classroom);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete'.$classroom->getUuid()->toString(), $request->request->get('_token'))) {
+            $this->entityManager->remove($classroom);
+            $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('classroom_index');
+        return $this->redirectToRoute('app_classroom_index');
     }
 }

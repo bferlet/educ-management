@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
 /**
+ * @todo    Write assertions with Validator components
  * @author  Gaëtan Rolé-Dubruille <gaetan.role-dubruille@sensiolabs.com>
  * @ORM\Entity(repositoryClass="App\Repository\ClassroomRepository")
  */

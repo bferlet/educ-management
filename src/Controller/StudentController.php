@@ -38,13 +38,14 @@ final class StudentController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Calcul $calcul): Response
     {
         $student = new Student();
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $student->setAverage($calcul->average($student->getFirstMark(), $student->getSecondMark()));
             $this->entityManager->persist($student);
             $this->entityManager->flush();
 

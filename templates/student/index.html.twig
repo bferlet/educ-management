@@ -23,6 +23,7 @@
                             <th>Gender</th>
                             <th>FirstMark</th>
                             <th>SecondMark</th>
+                            <th>Average</th>
                             <th>Id</th>
                             <th>Uuid</th>
                             <th>CreatedAt</th>
@@ -39,6 +40,7 @@
                                 <td>{{ student.gender ? 'Yes' : 'No' }}</td>
                                 <td>{{ student.firstMark }}</td>
                                 <td>{{ student.secondMark }}</td>
+                                <td>{{ student.average ?: 'N/A' }}</td>
                                 <td>{{ student.id }}</td>
                                 <td>{{ student.uuid }}</td>
                                 <td>{{ student.createdAt ? student.createdAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -50,7 +52,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="11" class="bg-danger">no records found</td>
+                                <td colspan="12" class="bg-danger">no records found</td>
                             </tr>
                         {% endfor %}
                         </tbody>

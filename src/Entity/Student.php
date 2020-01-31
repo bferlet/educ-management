@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Ramsey\Uuid\Uuid;
@@ -53,6 +52,11 @@ class Student
      * @ORM\ManyToOne(targetEntity="App\Entity\Classroom", inversedBy="students")
      */
     private $classroom;
+
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     */
+    private $average;
 
     /** @throws Exception */
     public function __construct()
@@ -141,6 +145,18 @@ class Student
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    public function getAverage(): ?string
+    {
+        return $this->average;
+    }
+
+    public function setAverage(?string $average): self
+    {
+        $this->average = $average;
 
         return $this;
     }

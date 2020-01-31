@@ -44,12 +44,13 @@ class StudentController extends AbstractController
 
         return $this->render('student/new.html.twig', [
             'student' => $student,
+            'button_label' => 'Ajouter',
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="student_show", methods={"GET"})
+     * @Route("/{uuid}", name="student_show", methods={"GET"})
      */
     public function show(Student $student): Response
     {
@@ -59,7 +60,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="student_edit", methods={"GET","POST"})
+     * @Route("/{uuid}/edit", name="student_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Student $student): Response
     {
@@ -67,7 +68,7 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $student->setUpdatedAt(new \DateTime());
+            $student->setUpdatedAt(new \DateTimeImmutable());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('student_index');
@@ -75,6 +76,7 @@ class StudentController extends AbstractController
 
         return $this->render('student/edit.html.twig', [
             'student' => $student,
+            'button_label' => 'Modifier',
             'form' => $form->createView(),
         ]);
     }

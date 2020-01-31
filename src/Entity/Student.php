@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role-dubruille@sensiolabs.com>
@@ -20,21 +22,27 @@ class Student
     use EntityTimeTrait;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=64)
      * @ORM\Column(type="string", length=64)
      */
     private $firstName;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=128)
      * @ORM\Column(type="string", length=128)
      */
     private $lastName;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="date_immutable")
      */
     private $birthDate;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="boolean")
      */
     private $gender;

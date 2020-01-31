@@ -19,6 +19,7 @@ class StudentType extends AbstractType
             ->add('firstMark')
             ->add('secondMark')
             ->add('classroom')
+            ->add('average')
         ;
     }
 

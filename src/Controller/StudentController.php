@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\Calcul;
 use \DateTime;
 use App\Entity\Student;
 use App\Form\StudentType;
@@ -64,12 +65,13 @@ final class StudentController extends AbstractController
     /**
      * @Route("/{uuid}/edit", name="edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Student $student): Response
+    public function edit(Request $request, Student $student, Calcul $calcul): Response
     {
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $student->setAverage($calcul->average($student->getFirstMark(), $student->getSecondMark()));
             $student->setUpdatedAt(new DateTime());
             $this->entityManager->flush();
 

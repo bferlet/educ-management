@@ -42,6 +42,14 @@ $ cd educ-management
 $ php bin/console server:run
 ```
 
+## Security commands 
+
+```bash
+$ bin/console make:user
+$ bin/console make:auth #Choice 1
+$ bin/console make:registration-form
+```
+
 ## Makefile usage
 
 ```bash

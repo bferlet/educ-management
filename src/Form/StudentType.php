@@ -18,9 +18,6 @@ class StudentType extends AbstractType
             ->add('gender')
             ->add('firstMark')
             ->add('secondMark')
-            ->add('uuid')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('classroom')
         ;
     }

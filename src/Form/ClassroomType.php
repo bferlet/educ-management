@@ -14,9 +14,6 @@ class ClassroomType extends AbstractType
         $builder
             ->add('name')
             ->add('grade')
-            ->add('uuid')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 

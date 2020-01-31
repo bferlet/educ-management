@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use \DateTime;
 use App\Entity\Student;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
@@ -69,6 +70,7 @@ final class StudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $student->setUpdatedAt(new DateTime());
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_student_index');

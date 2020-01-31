@@ -35,7 +35,7 @@ $ bin/console doctrine:migrations:migrate #IfMigrationsExist or bin/console m:m
 $ bin/console doctrine:fixtures:load #Load fake data in DB
 ```
 
-## Usagem
+## Usage
 
 ```bash
 $ cd educ-management

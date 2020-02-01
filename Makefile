@@ -135,9 +135,7 @@ security:			vendor ## Check security of your dependencies (https://security.sens
 qa-clean-conf:		## Erasing all quality assurance conf files
 					rm -rvf ./.php_cs ./phpcs.xml ./.phpcs-cache ./phpmd.xml ./.phpunit.result.cache
 
-qa: 				lint phpcs phpcbf phploc phpcpd phpmd ## Alias to run/apply Q&A tools
-
-.PHONY:				lt ly lc lint security qa qa-clean-conf
+.PHONY:				lt ly lc lint security qa-clean-conf
 
 ##
 ###------------#
